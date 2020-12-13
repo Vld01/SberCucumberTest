@@ -1,13 +1,12 @@
 package ru.appline.framework.utils;
 
 import io.qameta.allure.Attachment;
-import io.qameta.allure.junit5.AllureJunit5;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
-public class MyAllureListener extends AllureJunit5{
+public class MyAllureListener{
 
 
 //  Здесь должен быть переопределённые методы или метод который позволит прикреплять скриншоты к шагу аллюра

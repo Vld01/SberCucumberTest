@@ -10,14 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 
 public class StartPage extends BasePage {
-    @FindBy(xpath = "//a[@aria-label='Ипотека']")
-    WebElement mortgageElement;
+    @FindBy(xpath = "//button[@class=\"kitt-cookie-warning__close\"]")
+    private WebElement cookieButton;
 
-    @FindBy(xpath = "//a[text()='Ипотека на готовое жильё' and contains(@class, 'link_second')]")
-    WebElement mortgageCompleteHouseElement;
+    @FindBy(xpath = "//ul[contains(@class, \"kitt-top-menu__list\")]//label")
+    private List<WebElement> menuPanelList;
 
-    @FindBy(xpath = "//div[(@class = 'kitt-top-menu__pointer kitt-top-menu__pointer_icons ' and contains(@style, 'opacity: 1'))]")
-    List<WebElement> mortgageCheckSumMenuElement;
+    @FindBy(xpath = "//li[contains(@class, \"item_opened\")]//a")
+    private List<WebElement> subMenuList;
 
 
     /**
@@ -25,11 +25,14 @@ public class StartPage extends BasePage {
      *
      * @return SearchPage - т.е. переходим на страницу {@link ru.appline.framework.pages.MortgagePage}
      */
-    @Step("Выбираем подменю с ипотекой")
-    public MortgagePage choiceMortgageCompleteHouse(){
-        elementToBeClickable(mortgageElement).click();
-        assertFalse(mortgageCheckSumMenuElement.isEmpty(), "Подменю не отобразилось");
-        elementToBeClickable(mortgageCompleteHouseElement).click();
+
+    public StartPage selectMenu (String nameMenu) {
+        findItem(menuPanelList, nameMenu).click();
+        return this;
+    }
+
+    public MortgagePage selectSubMenu (String nameSubMenu) {
+        findItem(subMenuList, nameSubMenu).click();
         return app.getMortgagePage();
     }
 }
