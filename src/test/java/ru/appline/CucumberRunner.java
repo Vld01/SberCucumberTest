@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
                 "summary"},
         glue = {"steps"},
         features = {"src/test/resources/"},
-        tags = "sberbank"
+        tags = "@sberbank"
 )
 public class CucumberRunner {
 }

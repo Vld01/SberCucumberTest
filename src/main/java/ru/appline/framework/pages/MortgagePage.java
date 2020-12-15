@@ -4,8 +4,8 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
 
@@ -64,7 +64,8 @@ public class MortgagePage extends BasePage {
     public void switchToFrame() {
         if(!frameFlag) {
             frameFlag = true;
-            //scrollToElementJs("iFrameResizer0");
+            explicitWait(500);
+            scrollToElementJs(iFrame);
             getDriver().switchTo().frame("iFrameResizer0");
         }
     }
@@ -77,8 +78,7 @@ public class MortgagePage extends BasePage {
     @Step("Проверяем переход на страницу")
     public MortgagePage checkActualPage() {
         elementToBeVisible(mortgageHeaderElement);
-        assertEquals("Ипотека от 7,3%* на готовые квартиры", mortgageHeaderElement.getText(),
-                "Заголовок отсутствует/не соответствует требуемому");
+        assertEquals("Заголовок отсутствует/не соответствует требуемому", "Ипотека от 7,3%* на готовые квартиры", mortgageHeaderElement.getText());
         return this;
     }
 
@@ -111,7 +111,7 @@ public class MortgagePage extends BasePage {
                         "'Ипотека на готовое жилье'");
 
         }
-        assertEquals(value, Integer.parseInt(element.getAttribute("value").replaceAll(" ", "")), "Поле '" + nameField + "' было заполнено некорректно");
+        assertEquals("Поле '" + nameField + "' было заполнено некорректно", value, Integer.parseInt(element.getAttribute("value").replaceAll(" ", "")));
         return this;
     }
 
@@ -155,7 +155,7 @@ public class MortgagePage extends BasePage {
                         "'Ипотека на готовое жилье'");
 
         }
-        assertEquals(value, element.getAttribute("aria-checked"), "Поле '" + nameField + "' было заполнено некорректно");
+        assertEquals("Поле '" + nameField + "' было заполнено некорректно", value, element.getAttribute("aria-checked"));
         return this;
     }
 

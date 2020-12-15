@@ -1,6 +1,5 @@
 package ru.appline.framework.pages;
 
-import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.appline.framework.managers.PageManager;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
 /**
@@ -116,13 +113,29 @@ public class BasePage {
     }
 
     /**
+     * Общий метод явного ожидания
+     *
+     * @param millis - время ожидания в милисекундах
+     */
+    public void explicitWait(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Общий метод по заполнению чекбоксов
      *
      * @param field - веб-елемент поле ввода
      * @param value - значение вводимое в поле
      */
     public void fillInputCheckbox(WebElement field, String value) {
-        if (!field.getAttribute("aria-checked").equals(value)) field.click();
+        if (!field.getAttribute("aria-checked").equals(value)) {
+            explicitWait(200);
+            field.click();
+        }
     }
 
     /**
@@ -138,22 +151,10 @@ public class BasePage {
         int actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
 
         if (expectedValue != actualValue) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            explicitWait(1000);
             actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
         }
-        assertEquals(expectedValue, actualValue, "В поле '" + nameElement + "' значения не соответствует ожидаемому");
-    }
-
-    public WebElement findItem (List<WebElement> items, String value) {
-        for (WebElement item : items) {
-            if (item.getText().equalsIgnoreCase(value)) return item;
-        }
-        Assert.fail("Элемент \"" + value + "\" не найден");
-        return null;
+        assertEquals("В поле '" + nameElement + "' значения не соответствует ожидаемому", expectedValue, actualValue);
     }
 
     /**

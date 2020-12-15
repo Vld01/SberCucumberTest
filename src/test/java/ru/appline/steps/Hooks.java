@@ -3,10 +3,15 @@ package ru.appline.steps;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.qameta.allure.Allure;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import ru.appline.framework.managers.InitManager;
-import ru.appline.framework.utils.MyAllureListener;
 
-import static io.qameta.allure.Allure.getLifecycle;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
+import static ru.appline.framework.managers.DriverManager.getDriver;
 
 public class Hooks {
 
@@ -18,8 +23,13 @@ public class Hooks {
     @After
     public void afterEach(Scenario scenario) {
         if (scenario.isFailed()) {
-            getLifecycle().addAttachment("Скриншот","image/jpeg",null, MyAllureListener.addScreenshot());
+            Allure.addAttachment("failureScreenshot", "image/png", addScreenshot(), "png");
         }
         InitManager.quitFramework();
+    }
+
+    private static InputStream addScreenshot() {
+        byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+        return new ByteArrayInputStream(screenshot);
     }
 }

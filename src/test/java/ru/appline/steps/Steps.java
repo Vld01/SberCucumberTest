@@ -5,6 +5,7 @@ import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import ru.appline.framework.managers.PageManager;
 
+
 public class Steps {
     /**
      * Менеджер страниц
@@ -17,11 +18,8 @@ public class Steps {
         app.getStartPage();
     }
 
-    @Когда("^Переход в меню '(.*)'$")
-    public void selectMenu(String nameMenu) {app.getStartPage();}
-
-    @Когда("^В подменю выбираем '(.*)'$")
-    public void selectSubMenu(String nameSubMenu) {app.getStartPage().selectSubMenu(nameSubMenu);}
+    @Когда("^Переход в меню Ипотека и В подменю выбираем Ипотека на готовое жильё$")
+    public void selectMenu() {app.getStartPage().choiceMortgageCompleteHouse();}
 
     @Когда("^Заполняем форму поле/значение$")
     public void fillField(DataTable dataTable) {
