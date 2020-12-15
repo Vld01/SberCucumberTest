@@ -22,9 +22,10 @@
 
         <!-- Dependencies Version -->
         <selenium-java.version>3.141.59</selenium-java.version>
+        <junit.version>4.13.1</junit.version>
         <allure-cucumber.version>2.13.5</allure-cucumber.version>
         <cucumber.version>5.7.0</cucumber.version>
-        <aspectj.version>1.8.10</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
     </properties>
 
     <dependencies>

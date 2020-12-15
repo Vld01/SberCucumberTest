@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         plugin = {"io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
                 "progress",
                 "summary"},
-        glue = {"steps"},
+        glue = {"ru.appline.steps"},
         features = {"src/test/resources/"},
         tags = "@sberbank"
 )

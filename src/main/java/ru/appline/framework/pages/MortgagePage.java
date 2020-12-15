@@ -66,7 +66,7 @@ public class MortgagePage extends BasePage {
             frameFlag = true;
             explicitWait(500);
             scrollToElementJs(iFrame);
-            getDriver().switchTo().frame("iFrameResizer0");
+            getDriver().switchTo().frame(iFrame);
         }
     }
 
