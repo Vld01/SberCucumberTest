@@ -1,21 +1,9 @@
-pipeline {
-   agent any
-   stages {
-      stage('Build') {
-         steps {
-            // Get some code from a GitHub repository
-            git 'https://github.com/Vld01/SberCucumberTest'
-
-            // Run Maven on a Unix agent.
-            sh "mvn clean test -Dcucumber.filter.tags="${TAG}""
-
-         }
-      }
-   }
-}
-
 pipeline{
-   agent any
+    agent {
+        node {
+            label "{mbaykova}"
+        }
+    }
     stages{
         stage('Run Tests'){
             steps{
