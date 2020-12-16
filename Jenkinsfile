@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage('Run Tests'){
             steps{
-                withMaven(jdk: 'openjdk_1.8', maven: 'Maven3') {
+                withMaven(maven: 'Maven3') {
                     bat "mvn clean test -Dcucumber.filter.tags=\"${TAG}\""
                 }
             }
