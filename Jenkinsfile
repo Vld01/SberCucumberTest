@@ -1,8 +1,6 @@
 pipeline{
     agent {
-        node {
-            label "{mbaykova}"
-        }
+        label "mbaykova"
     }
     stages{
         stage('Run Tests'){
